@@ -1,20 +1,20 @@
 package taxiservice.service;
 
 import java.util.List;
-import taxiservice.models.Manufacture;
+import taxiservice.models.Manufacturer;
 
-public interface ManufactureService extends Service<Manufacture> {
+public interface ManufactureService extends Service<Manufacturer> {
     @Override
-    Manufacture create(Manufacture manufacture);
-
-    @Override
-    Manufacture get(Long id);
+    Manufacturer create(Manufacturer manufacturer);
 
     @Override
-    List<Manufacture> getAll();
+    Manufacturer get(Long id);
 
     @Override
-    Manufacture update(Manufacture manufacture);
+    List<Manufacturer> getAll();
+
+    @Override
+    Manufacturer update(Manufacturer manufacturer);
 
     @Override
     boolean delete(Long id);

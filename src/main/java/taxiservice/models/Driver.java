@@ -1,7 +1,6 @@
 package taxiservice.models;
 
 import java.util.Objects;
-import taxiservice.db.Storage;
 
 public class Driver {
     private Long id;
@@ -9,7 +8,6 @@ public class Driver {
     private String licenseNumber;
 
     public Driver(String name, String licenseNumber) {
-        id = Integer.toUnsignedLong(Storage.getManufactureStorage().size() + 1);
         this.name = name;
         this.licenseNumber = licenseNumber;
     }

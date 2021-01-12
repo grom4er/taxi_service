@@ -2,12 +2,12 @@ package taxiservice.models;
 
 import java.util.Objects;
 
-public class Manufacture {
+public class Manufacturer {
     private Long id;
     private String name;
     private String country;
 
-    public Manufacture(String name, String country) {
+    public Manufacturer(String name, String country) {
         this.name = name;
         this.country = country;
     }
@@ -44,7 +44,7 @@ public class Manufacture {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Manufacture that = (Manufacture) o;
+        Manufacturer that = (Manufacturer) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
                 && Objects.equals(country, that.country);

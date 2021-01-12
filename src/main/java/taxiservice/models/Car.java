@@ -3,18 +3,16 @@ package taxiservice.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import taxiservice.db.Storage;
 
 public class Car {
     private Long id;
     private String model;
-    private Manufacture manufacture;
+    private Manufacturer manufacturer;
     private List<Driver> drivers;
 
-    public Car(String model, Manufacture manufacture) {
-        id = Integer.toUnsignedLong(Storage.getManufactureStorage().size() + 1);
+    public Car(String model, Manufacturer manufacturer) {
         this.model = model;
-        this.manufacture = manufacture;
+        this.manufacturer = manufacturer;
         drivers = new ArrayList<>();
     }
 
@@ -34,12 +32,12 @@ public class Car {
         this.model = model;
     }
 
-    public Manufacture getManufacture() {
-        return manufacture;
+    public Manufacturer getManufacturer() {
+        return manufacturer;
     }
 
-    public void setManufacture(Manufacture manufacture) {
-        this.manufacture = manufacture;
+    public void setManufacture(Manufacturer manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public List<Driver> getDrivers() {
@@ -61,13 +59,13 @@ public class Car {
         Car car = (Car) o;
         return Objects.equals(id, car.id)
                 && Objects.equals(model, car.model)
-                && Objects.equals(manufacture, car.manufacture)
+                && Objects.equals(manufacturer, car.manufacturer)
                 && Objects.equals(drivers, car.drivers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, model, manufacture, drivers);
+        return Objects.hash(id, model, manufacturer, drivers);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class Car {
         return "Car{"
                 + "id=" + id
                 + ", model='" + model + '\''
-                + ", manufacture=" + manufacture
+                + ", manufacture=" + manufacturer
                 + ", drivers=" + drivers
                 + '}';
     }

@@ -2,19 +2,19 @@ package taxiservice.db;
 
 import java.util.ArrayList;
 import java.util.List;
-import taxiservice.models.Manufacture;
+import taxiservice.models.Manufacturer;
 
 public class Storage {
-    private static List<Manufacture> manufactureStorage = new ArrayList<>();
-    private static long manufactureId = 0;
+    private static List<Manufacturer> manufacturerStorage = new ArrayList<>();
+    private static long manufacturerId = 0;
 
-    public static Manufacture addManufactureToStorageAndTakeId(Manufacture manufacturer) {
-        manufacturer.setId(++manufactureId);
-        manufactureStorage.add(manufacturer);
+    public static Manufacturer addManufactureToStorageAndTakeId(Manufacturer manufacturer) {
+        manufacturer.setId(++manufacturerId);
+        manufacturerStorage.add(manufacturer);
         return manufacturer;
     }
 
-    public static List<Manufacture> getManufactureStorage() {
-        return manufactureStorage;
+    public static List<Manufacturer> getManufacturerStorage() {
+        return manufacturerStorage;
     }
 }

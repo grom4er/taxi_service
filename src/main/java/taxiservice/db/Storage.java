@@ -1,9 +1,8 @@
-package taxi_service.db;
-
-import taxi_service.models.Manufacture;
+package taxiservice.db;
 
 import java.util.ArrayList;
 import java.util.List;
+import taxiservice.models.Manufacture;
 
 public class Storage {
     private static List<Manufacture> manufactureStorage = new ArrayList<>();

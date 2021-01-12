@@ -3,11 +3,11 @@ package taxiservice.dao;
 import java.util.List;
 import java.util.Optional;
 import taxiservice.db.Storage;
-import taxiservice.lib.DaoImpl;
+import taxiservice.lib.Dao;
 import taxiservice.models.Manufacturer;
 
-@DaoImpl
-public class ManufacturerDaoImpl implements ManufacturerDao {
+@Dao
+public class ManufacturerGenericDaoImpl implements ManufacturerGenericDao {
     @Override
     public Manufacturer create(Manufacturer element) {
         return Storage.addManufactureToStorageAndTakeId(element);
@@ -33,7 +33,7 @@ public class ManufacturerDaoImpl implements ManufacturerDao {
                 .filter(x -> x.getId().equals(element.getId()))
                 .findFirst()
                 .ifPresent(x -> Storage.getManufacturerStorage()
-                        .set(element.getId().intValue(), element));
+                        .set(element.getId().intValue()-1, element));
         return element;
     }
 

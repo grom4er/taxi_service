@@ -2,7 +2,7 @@ package taxiservice.service;
 
 import java.util.List;
 
-public interface Service<T> {
+public interface GenericService<T> {
     T create(T type);
 
     T get(Long id);

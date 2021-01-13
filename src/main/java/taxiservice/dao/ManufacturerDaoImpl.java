@@ -2,12 +2,13 @@ package taxiservice.dao;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 import taxiservice.db.Storage;
 import taxiservice.lib.Dao;
 import taxiservice.models.Manufacturer;
 
 @Dao
-public class ManufacturerGenericDaoImpl implements ManufacturerGenericDao {
+public class ManufacturerDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer element) {
         return Storage.addManufactureToStorageAndTakeId(element);
@@ -28,12 +29,11 @@ public class ManufacturerGenericDaoImpl implements ManufacturerGenericDao {
 
     @Override
     public Manufacturer update(Manufacturer element) {
-        Storage.getManufacturerStorage()
-                .stream()
-                .filter(x -> x.getId().equals(element.getId()))
+        IntStream.range(0, Storage.getManufacturerStorage().size())
+                .filter(i -> Storage.getManufacturerStorage()
+                        .get(i).getId().equals(element.getId()))
                 .findFirst()
-                .ifPresent(x -> Storage.getManufacturerStorage()
-                        .set(element.getId().intValue()-1, element));
+                .ifPresent(i -> Storage.getManufacturerStorage().set(i, element));
         return element;
     }
 

@@ -62,7 +62,7 @@ public class Injector {
             Class<?>[] interfaces = clazz.getInterfaces();
             for (Class<?> singleInterface : interfaces) {
                 if (singleInterface.equals(certainInterface)
-                        && (clazz.isAnnotationPresent(GenericService.class)
+                        && (clazz.isAnnotationPresent(Service.class)
                         || clazz.isAnnotationPresent(Dao.class))) {
                     return clazz;
                 }

@@ -1,19 +1,19 @@
 package taxiservice.service;
 
 import java.util.List;
-import taxiservice.dao.ManufacturerGenericDao;
+import taxiservice.dao.ManufacturerDao;
 import taxiservice.lib.Inject;
-import taxiservice.lib.GenericService;
+import taxiservice.lib.Service;
 import taxiservice.models.Manufacturer;
 
-@GenericService
+@Service
 public class ManufactureServiceImpl implements ManufactureService {
     @Inject
-    private ManufacturerGenericDao manufactureDao;
+    private ManufacturerDao manufactureDao;
 
     @Override
     public Manufacturer create(Manufacturer manufacturer) {
-        return this.manufactureDao.create(manufacturer);
+        return manufactureDao.create(manufacturer);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package taxiservice.service;
 
 import java.util.List;
+
 import taxiservice.dao.DriverDao;
 import taxiservice.lib.Inject;
 import taxiservice.lib.Service;
@@ -18,9 +19,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver get(Long id) {
-        return driverDao.get(id).orElseThrow(
-                () -> new RuntimeException(
-                                String.format("Manufacturer by %d not found", id)));
+        return driverDao.get(id).get();
     }
 
     @Override

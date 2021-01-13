@@ -18,8 +18,10 @@ public class Application {
             "Show all %s after delete one from storage ";
     private static final ManufactureService manufacturerService =
             (ManufactureService) injector.getInstance(ManufactureService.class);
-    private static final CarService carService = (CarService) injector.getInstance(CarService.class);
-    private static final DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+    private static final CarService carService =
+            (CarService) injector.getInstance(CarService.class);
+    private static final DriverService driverService =
+            (DriverService) injector.getInstance(DriverService.class);
     private static final Manufacturer bmwManufacturer = new Manufacturer("BMW", "Germany");
     private static final Manufacturer mazdaManufacturer = new Manufacturer("Mazda", "Japan");
     private static final Car bmw = new Car("M5", bmwManufacturer);
@@ -51,10 +53,11 @@ public class Application {
 
     public static void testCarService(CarService service, Car firstCar, Car secondCar,
                                       Driver driver, DriverService driverService) {
-        String carText = "Cars";
+
         service.create(firstCar);
         service.create(secondCar);
         driverService.create(driver);
+        String carText = "Cars";
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), carText);
         System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(1L), carText);
         System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE + service.delete(1L), carText);

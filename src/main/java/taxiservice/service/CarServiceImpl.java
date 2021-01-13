@@ -19,9 +19,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car get(Long id) {
-        return carDao.get(id).orElseThrow(
-                () -> new RuntimeException(
-                        String.format("Car by %d not found", id)));
+        return carDao.get(id).get();
     }
 
     @Override

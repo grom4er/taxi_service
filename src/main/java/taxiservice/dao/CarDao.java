@@ -1,9 +1,8 @@
 package taxiservice.dao;
 
+import java.util.List;
 import taxiservice.models.Car;
 
-import java.util.List;
-
-public interface CarDao extends GenericDao<Car>{
+public interface CarDao extends GenericDao<Car> {
     List<Car> getAllByDriver(Long driverId);
 }

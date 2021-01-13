@@ -76,5 +76,4 @@ public class Application {
         System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE + service.delete(2L), driverText);
         System.out.printf("\n" + SHOW_ALL_STORAGE_AFTER_DELETE + service.getAll(), driverText);
     }
-
 }

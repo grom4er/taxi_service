@@ -16,19 +16,18 @@ public class Application {
     private static final String DELETE_FIRST_FROM_STORAGE = "Delete first %s from storage ";
     private static final String SHOW_ALL_STORAGE_AFTER_DELETE =
             "Show all %s after delete one from storage ";
+    private static final ManufactureService manufacturerService =
+            (ManufactureService) injector.getInstance(ManufactureService.class);
+    private static final CarService carService = (CarService) injector.getInstance(CarService.class);
+    private static final DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
+    private static final Manufacturer bmwManufacturer = new Manufacturer("BMW", "Germany");
+    private static final Manufacturer mazdaManufacturer = new Manufacturer("Mazda", "Japan");
+    private static final Car bmw = new Car("M5", bmwManufacturer);
+    private static final Car mazda = new Car("R5", mazdaManufacturer);
+    private static final Driver kolya = new Driver("Kolya", "DEDINS5");
+    private static final Driver vasya = new Driver("Vasya", "DAO3");
 
     public static void main(String[] args) {
-        ManufactureService manufacturerService =
-                (ManufactureService) injector.getInstance(ManufactureService.class);
-        CarService carService = (CarService) injector.getInstance(CarService.class);
-        DriverService driverService = (DriverService) injector.getInstance(DriverService.class);
-        Manufacturer bmwManufacturer = new Manufacturer("BMW", "Germany");
-        Manufacturer mazdaManufacturer = new Manufacturer("Mazda", "Japan");
-        Car bmw = new Car("M5", bmwManufacturer);
-        Car mazda = new Car("R5", mazdaManufacturer);
-        Driver kolya = new Driver("Kolya", "DEDINS5");
-        Driver vasya = new Driver("Vasya", "DAO3");
-
         System.err.println("Test Manufacture service");
         testManufactureService(manufacturerService, bmwManufacturer, mazdaManufacturer);
 

@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import taxiservice.db.Storage;
+import taxiservice.lib.Dao;
 import taxiservice.models.Driver;
 
+@Dao
 public class DriverDaoImpl implements DriverDao {
     @Override
     public Driver create(Driver element) {

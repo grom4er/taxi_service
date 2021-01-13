@@ -11,7 +11,7 @@ public class Storage {
     private static List<Manufacturer> manufacturerStorage = new ArrayList<>();
     private static long manufacturerId = 0;
     private static List<Car> carsStorage = new ArrayList<>();
-    private static long carId = 0;
+    private static long carId = 1;
     private static List<Driver> driversStorage = new ArrayList<>();
     private static long driverId = 0;
 

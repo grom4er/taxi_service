@@ -2,6 +2,7 @@ package taxiservice.dao.jbdc;
 
 
 import taxiservice.dao.ManufacturerDao;
+import taxiservice.exception.DataProcessingException;
 import taxiservice.lib.Dao;
 import taxiservice.models.Manufacturer;
 import taxiservice.util.ConnectionUtil;
@@ -14,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.zip.DataFormatException;
 
 @Dao
 public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
@@ -34,8 +36,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             }
             return element;
         } catch (SQLException e) {
-            //TODO
-            throw new RuntimeException("");
+            throw new DataProcessingException("text",e);
         }
     }
 
@@ -53,9 +54,8 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             } else {
                 throw new RuntimeException("");
             }
-        } catch (SQLException throwables) {
-            //TODO
-            throw new RuntimeException("");
+        } catch (SQLException e) {
+            throw new DataProcessingException("text",e);
         }
     }
 
@@ -71,8 +71,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             }
             return manufacturers;
         } catch (SQLException e) {
-            //TODO
-            throw new RuntimeException("");
+            throw new DataProcessingException("text",e);
         }
     }
 
@@ -88,8 +87,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             statement.executeUpdate();
             return element;
         } catch (SQLException e) {
-            //TODO
-            throw new RuntimeException("");
+            throw new DataProcessingException("text",e);
         }
     }
 
@@ -103,8 +101,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             int deletedLines = statement.executeUpdate();
             return deletedLines > 0;
         } catch (SQLException e) {
-            //TODO
-            throw new RuntimeException("");
+            throw new DataProcessingException("text",e);
         }
     }
 
@@ -118,7 +115,3 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
         return manufacturer;
     }
 }
-/*
-# name country
-1 bmw German
- */

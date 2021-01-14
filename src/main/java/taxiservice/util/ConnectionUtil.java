@@ -1,16 +1,18 @@
 package taxiservice.util;
 
+import taxiservice.exception.DataProcessingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+
 
 public class ConnectionUtil {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            // TODO
+           throw new DataProcessingException("Driver JDBC not found", e);
         }
     }
 
@@ -22,7 +24,7 @@ public class ConnectionUtil {
         try {
             return DriverManager.getConnection(url, dbProperties);
         } catch (SQLException e) {
-            throw new RuntimeException("");
+            throw new DataProcessingException("Can't create connection to DB", e);
         }
     }
 }

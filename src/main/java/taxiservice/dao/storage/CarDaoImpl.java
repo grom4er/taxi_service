@@ -1,9 +1,11 @@
-package taxiservice.dao;
+package taxiservice.dao.storage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+
+import taxiservice.dao.CarDao;
 import taxiservice.db.Storage;
 import taxiservice.lib.Dao;
 import taxiservice.models.Car;

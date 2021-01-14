@@ -24,8 +24,5 @@ public class ConnectionUtil {
         } catch (SQLException e) {
             throw new RuntimeException("");
         }
-
-
     }
-
 }

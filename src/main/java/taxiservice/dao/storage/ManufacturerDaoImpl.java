@@ -3,7 +3,6 @@ package taxiservice.dao.storage;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
-
 import taxiservice.dao.ManufacturerDao;
 import taxiservice.db.Storage;
 import taxiservice.lib.Dao;

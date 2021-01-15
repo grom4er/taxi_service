@@ -20,7 +20,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
     @Override
     public Manufacturer create(Manufacturer element) {
         String query = "INSERT INTO manufacturers "
-                + "(manufacturer_name, manufacturer_country) VALUE (?, ?)";
+                + "(name, country) VALUE (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query,
                          Statement.RETURN_GENERATED_KEYS)) {
@@ -73,7 +73,7 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
 
     @Override
     public Manufacturer update(Manufacturer element) {
-        String query = "UPDATE manufacturers SET manufacturer_name = ?, manufacturer_country = ? "
+        String query = "UPDATE manufacturers SET name = ?, country = ? "
                 + " WHERE manufacturer_id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {

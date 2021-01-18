@@ -1,8 +1,9 @@
-package taxiservice.dao;
+package taxiservice.dao.storage;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+import taxiservice.dao.DriverDao;
 import taxiservice.db.Storage;
 import taxiservice.lib.Dao;
 import taxiservice.models.Driver;

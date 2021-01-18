@@ -46,7 +46,7 @@ public class Application {
         service.create(one);
         service.create(two);
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), manufactureText);
-        System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(1L), manufactureText);
+        System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(2L), manufactureText);
         System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE + service.delete(1L), manufactureText);
         System.out.printf("\n" + SHOW_ALL_STORAGE_AFTER_DELETE + service.getAll(), manufactureText);
     }

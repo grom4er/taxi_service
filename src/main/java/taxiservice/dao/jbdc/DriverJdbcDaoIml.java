@@ -1,5 +1,14 @@
 package taxiservice.dao.jbdc;
 
+import taxiservice.dao.CarDao;
+import taxiservice.dao.DriverDao;
+import taxiservice.exception.DataProcessingException;
+import taxiservice.lib.Dao;
+import taxiservice.models.Car;
+import taxiservice.models.Driver;
+import taxiservice.models.Manufacturer;
+import taxiservice.util.ConnectionUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +17,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import taxiservice.dao.DriverDao;
-import taxiservice.exception.DataProcessingException;
-import taxiservice.models.Driver;
-import taxiservice.util.ConnectionUtil;
 
+@Dao
 public class DriverJdbcDaoIml implements DriverDao {
     @Override
     public Driver create(Driver element) {

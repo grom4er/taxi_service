@@ -1,14 +1,5 @@
 package taxiservice.dao.jbdc;
 
-import taxiservice.dao.CarDao;
-import taxiservice.dao.DriverDao;
-import taxiservice.exception.DataProcessingException;
-import taxiservice.lib.Dao;
-import taxiservice.models.Car;
-import taxiservice.models.Driver;
-import taxiservice.models.Manufacturer;
-import taxiservice.util.ConnectionUtil;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import taxiservice.dao.DriverDao;
+import taxiservice.exception.DataProcessingException;
+import taxiservice.lib.Dao;
+import taxiservice.models.Driver;
+import taxiservice.util.ConnectionUtil;
 
 @Dao
 public class DriverJdbcDaoIml implements DriverDao {
@@ -24,8 +20,8 @@ public class DriverJdbcDaoIml implements DriverDao {
     public Driver create(Driver element) {
         String query = "INSERT INTO drivers (name, license_number) VALUE (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query,
-                     Statement.RETURN_GENERATED_KEYS)) {
+                 PreparedStatement statement = connection.prepareStatement(query,
+                         Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, element.getName());
             statement.setString(2, element.getLicenseNumber());
             statement.executeUpdate();
@@ -35,7 +31,8 @@ public class DriverJdbcDaoIml implements DriverDao {
             }
             return element;
         } catch (SQLException e) {
-            throw new DataProcessingException(String.format("Data %s can't add to table", element), e);
+            throw new DataProcessingException(String.format("Data %s can't add to table",
+                    element), e);
         }
     }
 
@@ -60,7 +57,7 @@ public class DriverJdbcDaoIml implements DriverDao {
     public List<Driver> getAll() {
         String query = "SELECT * FROM drivers WHERE deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
             List<Driver> drivers = new ArrayList<>();
             while (resultSet.next()) {
@@ -77,7 +74,7 @@ public class DriverJdbcDaoIml implements DriverDao {
         String query = "UPDATE drivers SET name = ?, license_number = ? "
                 + " WHERE id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, element.getName());
             statement.setString(2, element.getLicenseNumber());
             statement.setLong(3, element.getId());
@@ -94,7 +91,7 @@ public class DriverJdbcDaoIml implements DriverDao {
         String query = "UPDATE drivers "
                 + "SET deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                 PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
             return statement.executeUpdate() > 0;
         } catch (SQLException e) {

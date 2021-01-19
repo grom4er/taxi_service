@@ -57,7 +57,7 @@ public class CarJdbcDaoImpl implements CarDao {
             if (!resultSet.next()) {
                 return Optional.empty();
             }
-            return Optional.of(parseCarFromResultSet(resultSet));
+            return Optional.of(parseCarFromResultSetAndSetDriversToCar(resultSet));
         } catch (SQLException e) {
             throw new DataProcessingException("Can't get car by id: " + id, e);
         }
@@ -79,7 +79,7 @@ public class CarJdbcDaoImpl implements CarDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Car> cars = new ArrayList<>();
             while (resultSet.next()) {
-                cars.add(parseCarFromResultSet(resultSet));
+                cars.add(parseCarFromResultSetAndSetDriversToCar(resultSet));
             }
             return cars;
         } catch (SQLException e) {
@@ -98,7 +98,6 @@ public class CarJdbcDaoImpl implements CarDao {
             preparedStatement.setLong(3, car.getId());
             preparedStatement.executeUpdate();
             Car old = get(car.getId()).get();
-
             updateDriversByCar(car);
             return old;
         } catch (SQLException e) {
@@ -123,16 +122,16 @@ public class CarJdbcDaoImpl implements CarDao {
 
     @Override
     public List<Car> getAllByDriver(Long driverId) {
-        String selectQuery = "SELECT c.id as id, "
+        String selectQuery = "SELECT c.id AS id, "
                 + "model, "
                 + "manufacturer_id, "
                 + "m.name as manufacturer_name, "
                 + "m.country as manufacturer_country "
                 + "FROM cars c"
-                + " LEFT JOIN manufacturers m on c.manufacturer_id = m.id"
-                + " join cars_drivers cd on c.id = cd.car_id"
-                + " join drivers d on cd.driver_id = d.id"
-                + " where c.deleted = false and driver_id = ?";
+                + " LEFT JOIN manufacturers m ON c.manufacturer_id = m.id"
+                + " JOIN cars_drivers cd ON c.id = cd.car_id"
+                + " JOIN drivers d ON cd.driver_id = d.id"
+                + " WHERE c.deleted = false AND d.deleted = false AND driver_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement preparedStatement =
                          connection.prepareStatement(selectQuery)) {
@@ -140,7 +139,7 @@ public class CarJdbcDaoImpl implements CarDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Car> cars = new ArrayList<>();
             while (resultSet.next()) {
-                cars.add(parseCarFromResultSet(resultSet));
+                cars.add(parseCarFromResultSetAndSetDriversToCar(resultSet));
             }
             return cars;
         } catch (SQLException e) {
@@ -236,7 +235,7 @@ public class CarJdbcDaoImpl implements CarDao {
         return driver;
     }
 
-    private Car parseCarFromResultSet(ResultSet resultSet) throws SQLException {
+    private Car parseCarFromResultSetAndSetDriversToCar(ResultSet resultSet) throws SQLException {
         long manufacturerId = resultSet.getLong("manufacturer_id");
         String manufacturerName = resultSet.getNString("manufacturer_name");
         String manufacturerCountry = resultSet.getNString("manufacturer_country");

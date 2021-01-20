@@ -8,24 +8,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import taxiservice.dao.ManufacturerDao;
+import taxiservice.dao.DriverDao;
 import taxiservice.exception.DataProcessingException;
 import taxiservice.lib.Dao;
-import taxiservice.models.Manufacturer;
+import taxiservice.models.Driver;
 import taxiservice.util.ConnectionUtil;
 
 @Dao
-public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
-
+public class DriverJdbcDaoIml implements DriverDao {
     @Override
-    public Manufacturer create(Manufacturer element) {
-        String query = "INSERT INTO manufacturers "
-                + "(name, country) VALUE (?, ?)";
+    public Driver create(Driver element) {
+        String query = "INSERT INTO drivers (name, license_number) VALUE (?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query,
                          Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, element.getName());
-            statement.setString(2, element.getCountry());
+            statement.setString(2, element.getLicenseNumber());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
@@ -33,21 +31,21 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
             }
             return element;
         } catch (SQLException e) {
-            throw new DataProcessingException(
-                    String.format("Data %s can't add to table", element), e);
+            throw new DataProcessingException(String.format("Data %s can't add to table",
+                    element), e);
         }
     }
 
     @Override
-    public Optional<Manufacturer> get(Long id) {
-        String query = "SELECT * FROM manufacturers "
+    public Optional<Driver> get(Long id) {
+        String query = "SELECT * FROM drivers "
                 + "WHERE id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return Optional.ofNullable(getManufacturer(resultSet));
+                return Optional.ofNullable(getDriver(resultSet));
             }
             return Optional.empty();
         } catch (SQLException e) {
@@ -56,29 +54,29 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
     }
 
     @Override
-    public List<Manufacturer> getAll() {
-        String query = "SELECT * FROM manufacturers WHERE deleted = false";
+    public List<Driver> getAll() {
+        String query = "SELECT * FROM drivers WHERE deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             ResultSet resultSet = statement.executeQuery();
-            List<Manufacturer> manufacturers = new ArrayList<>();
+            List<Driver> drivers = new ArrayList<>();
             while (resultSet.next()) {
-                manufacturers.add(getManufacturer(resultSet));
+                drivers.add(getDriver(resultSet));
             }
-            return manufacturers;
+            return drivers;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't take data from DB", e);
         }
     }
 
     @Override
-    public Manufacturer update(Manufacturer element) {
-        String query = "UPDATE manufacturers SET name = ?, country = ? "
+    public Driver update(Driver element) {
+        String query = "UPDATE drivers SET name = ?, license_number = ? "
                 + " WHERE id = ? AND deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, element.getName());
-            statement.setString(2, element.getCountry());
+            statement.setString(2, element.getLicenseNumber());
             statement.setLong(3, element.getId());
             statement.executeUpdate();
             return element;
@@ -90,25 +88,24 @@ public class ManufacturerJdbcDaoImpl implements ManufacturerDao {
 
     @Override
     public boolean delete(Long id) {
-        String query = "UPDATE manufacturers "
+        String query = "UPDATE drivers "
                 + "SET deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
                  PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, id);
-            int deletedLines = statement.executeUpdate();
-            return deletedLines > 0;
+            return statement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new DataProcessingException(
                     String.format("Can't delete data with id %d from DB", id), e);
         }
     }
 
-    private Manufacturer getManufacturer(ResultSet resultSet) throws SQLException {
-        Long manufacturerId = resultSet.getObject("id", Long.class);
+    private Driver getDriver(ResultSet resultSet) throws SQLException {
+        Long droverId = resultSet.getObject("id", Long.class);
         String name = resultSet.getString("name");
-        String country = resultSet.getString("country");
-        Manufacturer manufacturer = new Manufacturer(name, country);
-        manufacturer.setId(manufacturerId);
-        return manufacturer;
+        String licenseNumber = resultSet.getString("license_number");
+        Driver driver = new Driver(name, licenseNumber);
+        driver.setId(droverId);
+        return driver;
     }
 }

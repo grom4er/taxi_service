@@ -43,24 +43,27 @@ public class Application {
     public static void testManufactureService(ManufactureService service,
                                               Manufacturer one, Manufacturer two) {
         String manufactureText = "Manufacture";
-        service.create(one);
-        service.create(two);
+        one = service.create(one);
+        two = service.create(two);
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), manufactureText);
-        System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(2L), manufactureText);
-        System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE + service.delete(1L), manufactureText);
+        System.out.printf("\n" + GET_FIRST_FROM_STORAGE
+                + service.get(one.getId()), manufactureText);
+        System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE
+                + service.delete(one.getId()), manufactureText);
         System.out.printf("\n" + SHOW_ALL_STORAGE_AFTER_DELETE + service.getAll(), manufactureText);
     }
 
     public static void testCarService(CarService service, Car firstCar, Car secondCar,
                                       Driver driver, DriverService driverService) {
 
-        service.create(firstCar);
-        service.create(secondCar);
-        driverService.create(driver);
+        firstCar = service.create(firstCar);
+        secondCar = service.create(secondCar);
+        driver = driverService.create(driver);
         String carText = "Cars";
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), carText);
-        System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(1L), carText);
-        System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE + service.delete(1L), carText);
+        System.out.printf("\n" + GET_FIRST_FROM_STORAGE + service.get(firstCar.getId()), carText);
+        System.out.printf("\n" + DELETE_FIRST_FROM_STORAGE
+                + service.delete(firstCar.getId()), carText);
         service.addDriverToCar(driver, secondCar);
         System.out.println("\n" + "Add new driver to first car");
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), carText);
@@ -68,7 +71,8 @@ public class Application {
         System.out.println("\n" + "remove driver from first car");
         System.out.printf(SHOW_ALL_IN_STORAGE + service.getAll(), carText);
         service.addDriverToCar(driver, secondCar);
-        System.out.println("\n" + "get car by id 1 driver" + service.getAllByDriver(1L));
+        System.out.println("\n" + "get car by id 1 driver"
+                + service.getAllByDriver(driver.getId()));
     }
 
     public static void testDriveService(DriverService service, Driver two) {

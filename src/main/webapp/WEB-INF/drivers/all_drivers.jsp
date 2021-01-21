@@ -24,6 +24,11 @@
             </td>
         </tr>
     </c:forEach>
+    <p>
+        <a href="${pageContext.request.contextPath}/">
+            <button type="submit">Main page</button>
+        </a>
+    </p>
 </table>
 </body>
 </html>

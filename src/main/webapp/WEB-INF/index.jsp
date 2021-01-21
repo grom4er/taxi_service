@@ -4,19 +4,19 @@
     <title>Main page</title>
   </head>
   <body>
-  <form action="${pageContext.request.contextPath}/cars/create_car">
+  <form action="${pageContext.request.contextPath}/cars/create">
     <button type="submit">Create a car</button>
   </form>
-  <form action="${pageContext.request.contextPath}/drivers/all_drivers">
+  <form action="${pageContext.request.contextPath}/drivers/">
     <button type="submit">Display all drivers</button>
   </form>
-  <form action="${pageContext.request.contextPath}/manufacturer/create_manufacturer">
+  <form action="${pageContext.request.contextPath}/manufacturer/create">
     <button type="submit">Create a manufacturer</button>
   </form>
-  <form action="${pageContext.request.contextPath}/drivers/create_driver">
+  <form action="${pageContext.request.contextPath}/drivers/create">
     <button type="submit">Create driver</button>
   </form>
-  <form action="${pageContext.request.contextPath}/cars/add_driver_to_car">
+  <form action="${pageContext.request.contextPath}/cars/driver/add">
     <button type="submit">Add driver to car</button>
   </form>
   </body>

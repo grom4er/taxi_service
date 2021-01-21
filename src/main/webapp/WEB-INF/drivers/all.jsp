@@ -25,7 +25,7 @@
         </tr>
     </c:forEach>
     <p>
-        <a href="${pageContext.request.contextPath}/">
+        <a href="${pageContext.request.contextPath}/index">
             <button type="submit">Main page</button>
         </a>
     </p>

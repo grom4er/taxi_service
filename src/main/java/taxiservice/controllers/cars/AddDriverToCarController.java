@@ -22,7 +22,7 @@ public class AddDriverToCarController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/cars/add_driver_to_car.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/cars/driver/add.jsp").forward(req, resp);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

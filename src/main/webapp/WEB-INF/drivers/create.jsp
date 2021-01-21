@@ -6,7 +6,7 @@
 <body>
 <h1>Please write a new driver.</h1>
 
-<form method="post" action="${pageContext.request.contextPath}/drivers/create_driver">
+<form method="post" action="${pageContext.request.contextPath}/drivers/create">
     Driver name:<input type="text" name="name" pattern="^([A-Z])[a-z]*">
     Driver license number:<input type="text" name="license">
     <button type="submit">Create driver</button>

@@ -22,7 +22,7 @@ public class CreateCarController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/cars/create_car.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/cars/create.jsp").forward(req, resp);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class CreateCarController extends HttpServlet {
             throws IOException {
         String model = req.getParameter("model");
         String manufactureId = req.getParameter("manufacture id");
-        Manufacturer manufacturer = manufactureService.get(Long.parseLong(manufactureId));
+        Manufacturer manufacturer = manufactureService.get(Long.valueOf(manufactureId));
         Car car = new Car(model, manufacturer);
         carService.create(car);
         resp.sendRedirect(req.getContextPath() + "/");

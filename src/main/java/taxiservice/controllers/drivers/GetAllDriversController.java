@@ -5,12 +5,12 @@ import taxiservice.lib.Injector;
 import taxiservice.models.Driver;
 import taxiservice.service.DriverService;
 
-import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 public class GetAllDriversController extends HttpServlet {
     private static final Injector injector =
@@ -20,13 +20,8 @@ public class GetAllDriversController extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-//        Driver driver = new Driver("Alex","asd");
-//        driverService.create(driver);
         List<Driver> drivers = driverService.getAll();
-
-
         req.setAttribute("drivers", drivers);
-
         req.getRequestDispatcher("/WEB-INF/drivers/all_drivers.jsp").forward(req, resp);
     }
 }

@@ -6,12 +6,11 @@ import taxiservice.models.Car;
 import taxiservice.models.Manufacturer;
 import taxiservice.service.CarService;
 import taxiservice.service.ManufactureService;
-
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CreateCarController extends HttpServlet {
     private static final Injector injector =
@@ -20,7 +19,6 @@ public class CreateCarController extends HttpServlet {
             (CarService) injector.getInstance(CarService.class);
     private static final ManufactureService manufactureService =
             (ManufactureService) injector.getInstance(ManufactureService.class);
-
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {

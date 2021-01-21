@@ -4,7 +4,6 @@ import taxiservice.Application;
 import taxiservice.lib.Injector;
 import taxiservice.models.Driver;
 import taxiservice.service.DriverService;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

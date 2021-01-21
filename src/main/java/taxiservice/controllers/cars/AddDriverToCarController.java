@@ -6,11 +6,11 @@ import taxiservice.models.Car;
 import taxiservice.models.Driver;
 import taxiservice.service.CarService;
 import taxiservice.service.DriverService;
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class AddDriverToCarController extends HttpServlet {
     private static final Injector injector =
@@ -27,7 +27,6 @@ public class AddDriverToCarController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
         String carID = req.getParameter("carID");
         String driverID = req.getParameter("driverID");
         Car car = carService.get(Long.valueOf(carID));

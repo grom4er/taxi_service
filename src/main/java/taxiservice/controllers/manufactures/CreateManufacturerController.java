@@ -2,16 +2,13 @@ package taxiservice.controllers.manufactures;
 
 import taxiservice.Application;
 import taxiservice.lib.Injector;
-import taxiservice.models.Driver;
 import taxiservice.models.Manufacturer;
-import taxiservice.service.DriverService;
 import taxiservice.service.ManufactureService;
-
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CreateManufacturerController extends HttpServlet {
     private static final Injector injector =

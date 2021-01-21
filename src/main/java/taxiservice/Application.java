@@ -30,8 +30,6 @@ public class Application {
     private static final Driver vasya = new Driver("Vasya", "DAO3");
 
     public static void main(String[] args) {
-
-
         System.err.println("Test Manufacture service");
         testManufactureService(manufacturerService, bmwManufacturer, mazdaManufacturer);
 

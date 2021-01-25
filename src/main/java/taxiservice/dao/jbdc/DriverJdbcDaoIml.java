@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import taxiservice.dao.DriverDao;
 import taxiservice.exception.DataProcessingException;
 import taxiservice.lib.Dao;
@@ -17,15 +16,13 @@ import taxiservice.util.ConnectionUtil;
 
 @Dao
 public class DriverJdbcDaoIml implements DriverDao {
-
-
     @Override
     public Driver create(Driver driver) {
         String insertQuery = "INSERT INTO drivers (name, license_number, login, password)"
                 + "VALUES (?, ?, ?, ?)";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(
                              insertQuery, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
@@ -46,8 +43,8 @@ public class DriverJdbcDaoIml implements DriverDao {
     public Optional<Driver> get(Long id) {
         String selectQuery = "SELECT * FROM drivers where id = ? and deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(selectQuery)) {
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(selectQuery)) {
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
@@ -63,8 +60,8 @@ public class DriverJdbcDaoIml implements DriverDao {
     public List<Driver> getAll() {
         String selectQuery = "SELECT * FROM drivers where deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(selectQuery)) {
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(selectQuery)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Driver> drivers = new ArrayList<>();
             while (resultSet.next()) {
@@ -82,8 +79,8 @@ public class DriverJdbcDaoIml implements DriverDao {
                 + " login = ?, password = ? WHERE id = ?"
                 + " and deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(selectQuery)) {
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(selectQuery)) {
             preparedStatement.setString(1, driver.getName());
             preparedStatement.setString(2, driver.getLicenseNumber());
             preparedStatement.setString(3, driver.getLogin());
@@ -101,8 +98,8 @@ public class DriverJdbcDaoIml implements DriverDao {
         String selectQuery = "UPDATE drivers SET deleted = true WHERE id = ?"
                 + " and deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(selectQuery)) {
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(selectQuery)) {
             preparedStatement.setLong(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -130,8 +127,8 @@ public class DriverJdbcDaoIml implements DriverDao {
     public Optional<Driver> findByLogin(String login) {
         String selectQuery = "SELECT * FROM drivers where login LIKE ? and deleted = false";
         try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement preparedStatement =
-                     connection.prepareStatement(selectQuery)) {
+                 PreparedStatement preparedStatement =
+                         connection.prepareStatement(selectQuery)) {
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {

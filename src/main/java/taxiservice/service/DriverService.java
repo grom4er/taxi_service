@@ -2,7 +2,6 @@ package taxiservice.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import taxiservice.models.Driver;
 
 public interface DriverService {
@@ -16,5 +15,5 @@ public interface DriverService {
 
     boolean delete(Long id);
 
-   Optional<Driver> findByLogin(String login);
+    Optional<Driver> findByLogin(String login);
 }

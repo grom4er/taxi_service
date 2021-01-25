@@ -1,6 +1,6 @@
 package taxiservice.exception;
 
-public class AuthenticationException extends Exception{
+public class AuthenticationException extends Exception {
     public AuthenticationException(String message) {
         super(message);
     }

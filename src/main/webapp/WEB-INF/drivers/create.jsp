@@ -10,7 +10,7 @@
     Driver name:<input type="text" name="name" pattern="^([A-Z])[a-z]*">
     Driver license number:<input type="text" name="license">
     Driver login:<input type="text" name="login" pattern="^a-z0-9]*">
-    Driver password number:<input type="text" name="pwd">
+    Driver password number:<input type="password" name="pwd">
     <button type="submit">Create driver</button>
 </form>
 <p>

@@ -1,9 +1,7 @@
 package taxiservice.security;
 
-import taxiservice.Application;
 import taxiservice.exception.AuthenticationException;
 import taxiservice.lib.Inject;
-import taxiservice.lib.Injector;
 import taxiservice.lib.Service;
 import taxiservice.models.Driver;
 import taxiservice.service.DriverService;

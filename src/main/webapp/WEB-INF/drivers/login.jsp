@@ -9,7 +9,7 @@
 
 <form method="post" action="${pageContext.request.contextPath}/drivers/login">
     Driver login:<input type="text" name="login" pattern="^[a-z]*">
-    Driver password :<input type="text" name="pwd">
+    Driver password :<input type="password" name="pwd">
     <button type="submit">Login</button>
 </form>
 <p>

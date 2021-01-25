@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import taxiservice.Application;
 import taxiservice.lib.Injector;
 import taxiservice.models.Driver;
@@ -26,7 +27,11 @@ public class CreateDriverController extends HttpServlet {
             throws IOException {
         String name = req.getParameter("name");
         String license = req.getParameter("license");
+        String login = req.getParameter("login");
+        String password = req.getParameter("pwd");
         Driver driver = new Driver(name, license);
+        driver.setLogin(login);
+        driver.setPassword(password);
         driverService.create(driver);
         resp.sendRedirect(req.getContextPath() + "/");
     }

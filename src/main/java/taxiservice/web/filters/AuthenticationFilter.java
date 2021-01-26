@@ -11,22 +11,15 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import taxiservice.Application;
-import taxiservice.lib.Injector;
-import taxiservice.service.DriverService;
 
 public class AuthenticationFilter implements Filter {
     private static final String DRIVER_ID = "driver_id";
-    private static final Injector injector =
-            Injector.getInstance(Application.class.getPackageName());
-    private static final DriverService driverService =
-            (DriverService) injector.getInstance(DriverService.class);
-    private static final Set<String> ALLOWED_URL = new HashSet<>();
+    private static final Set<String> allowedUrls = new HashSet<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        ALLOWED_URL.add("/drivers/create");
-        ALLOWED_URL.add("/drivers/login");
+        allowedUrls.add("/drivers/create");
+        allowedUrls.add("/drivers/login");
     }
 
     @Override
@@ -37,13 +30,13 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String url = request.getServletPath();
-        if (ALLOWED_URL.contains(url)) {
+        if (allowedUrls.contains(url)) {
             filterChain.doFilter(request, response);
             return;
         }
 
         Long driverId = (Long) request.getSession().getAttribute(DRIVER_ID);
-        if (driverService.get(driverId) == null) {
+        if (driverId == null) {
             response.sendRedirect("/drivers/login");
             return;
         }
